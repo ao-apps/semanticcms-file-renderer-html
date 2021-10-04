@@ -49,7 +49,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
 
-final public class FileHtmlRenderer {
+public final class FileHtmlRenderer {
 
 	/**
 	 * @param  <Ex>  An arbitrary exception type that may be thrown

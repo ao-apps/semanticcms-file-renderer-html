@@ -1,6 +1,6 @@
 /*
  * semanticcms-file-renderer-html - Files referenced in HTML in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -39,7 +39,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-final public class FileUtils {
+public final class FileUtils {
 
 	private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
 
