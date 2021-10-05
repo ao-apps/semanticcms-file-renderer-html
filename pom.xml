@@ -39,7 +39,7 @@ along with semanticcms-file-renderer-html.  If not, see <http://www.gnu.org/lice
 / <a target="${javadoc.target}" href="${project.url}">Renderer HTML</a>]]></javadoc.breadcrumbs>
 		<!-- SonarQube -->
 		<sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
-		<sonar.organization>aoindustries</sonar.organization>
+		<sonar.organization>ao-apps</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<!-- TODO: Implement tests -->
 		<sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>
@@ -74,20 +74,20 @@ along with semanticcms-file-renderer-html.  If not, see <http://www.gnu.org/lice
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/aoindustries/semanticcms-file-renderer-html.git</connection>
-		<developerConnection>scm:git:git@github.com:aoindustries/semanticcms-file-renderer-html.git</developerConnection>
-		<url>https://github.com/aoindustries/semanticcms-file-renderer-html</url>
+		<connection>scm:git:git://github.com/ao-apps/semanticcms-file-renderer-html.git</connection>
+		<developerConnection>scm:git:git@github.com:ao-apps/semanticcms-file-renderer-html.git</developerConnection>
+		<url>https://github.com/ao-apps/semanticcms-file-renderer-html</url>
 		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/aoindustries/semanticcms-file-renderer-html/issues</url>
+		<url>https://github.com/ao-apps/semanticcms-file-renderer-html/issues</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>GitHub Actions</system>
-		<url>https://github.com/aoindustries/semanticcms-file-renderer-html/actions</url>
+		<url>https://github.com/ao-apps/semanticcms-file-renderer-html/actions</url>
 	</ciManagement>
 
 	<repositories>
