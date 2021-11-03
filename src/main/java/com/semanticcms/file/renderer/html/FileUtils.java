@@ -26,7 +26,6 @@ import com.semanticcms.core.controller.CapturePage;
 import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.Element;
 import com.semanticcms.core.model.Page;
-import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.file.model.File;
 import com.semanticcms.openfile.servlet.OpenFile;
@@ -86,7 +85,7 @@ public final class FileUtils {
 			response,
 			page,
 			CaptureLevel.META,
-			(Page p) -> {
+			p -> {
 				for(Element e : p.getElements()) {
 					if((e instanceof File) && !((File)e).isHidden()) {
 						return true;
@@ -94,9 +93,9 @@ public final class FileUtils {
 				}
 				return null;
 			},
-			(Page p) -> recursive ? p.getChildRefs() : null,
+			p -> recursive ? p.getChildRefs() : null,
 			// Child is in accessible book
-			(PageRef childPage) -> semanticCMS.getBook(childPage.getBookRef()).isAccessible()
+			childPage -> semanticCMS.getBook(childPage.getBookRef()).isAccessible()
 		) != null;
 	}
 
