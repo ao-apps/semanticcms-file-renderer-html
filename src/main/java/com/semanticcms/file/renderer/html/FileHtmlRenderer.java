@@ -49,7 +49,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
 
-public final class FileHtmlRenderer {
+public abstract class FileHtmlRenderer {
+
+	/** Make no instances. */
+	private FileHtmlRenderer() {throw new AssertionError();}
 
 	/**
 	 * @param  <Ex>  An arbitrary exception type that may be thrown
@@ -216,11 +219,5 @@ public final class FileHtmlRenderer {
 			// TODO: Close earlier?
 			if(conn != null) conn.close();
 		}
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private FileHtmlRenderer() {
 	}
 }

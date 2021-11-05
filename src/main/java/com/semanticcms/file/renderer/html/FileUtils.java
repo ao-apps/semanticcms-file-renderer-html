@@ -38,11 +38,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public final class FileUtils {
+public abstract class FileUtils {
+
+	/** Make no instances. */
+	private FileUtils() {throw new AssertionError();}
 
 	private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
 
-	private static class IsOpenFileAllowedLock {}
+	private static class IsOpenFileAllowedLock {/* Empty lock class to help heap profile */}
 	private static final IsOpenFileAllowedLock isOpenFileAllowedLock = new IsOpenFileAllowedLock();
 	private static boolean openFileNotFound;
 
@@ -97,11 +100,5 @@ public final class FileUtils {
 			// Child is in accessible book
 			childPage -> semanticCMS.getBook(childPage.getBookRef()).isAccessible()
 		) != null;
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private FileUtils() {
 	}
 }
