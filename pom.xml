@@ -99,6 +99,9 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
 			<releases>
 				<enabled>false</enabled>
 			</releases>
+			<snapshots>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
 		</repository>
 	</repositories>
 
