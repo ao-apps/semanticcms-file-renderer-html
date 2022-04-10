@@ -43,6 +43,7 @@ import com.semanticcms.core.servlet.ServletElementContext;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Writer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -201,7 +202,9 @@ public final class FileHtmlRenderer {
 							if(isDirectory) a__.text(Path.SEPARATOR_CHAR);
 						}
 					} else {
-						body.writeTo(new NodeBodyWriter(element, a__.getUnsafe(), new ServletElementContext(servletContext, request, response)));
+						@SuppressWarnings("deprecation")
+						Writer unsafe = a__.getRawUnsafe();
+						body.writeTo(new NodeBodyWriter(element, unsafe, new ServletElementContext(servletContext, request, response)));
 					}
 				});
 				long length;
