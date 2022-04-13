@@ -72,7 +72,7 @@ public final class FileHtmlRenderer {
 		HttpServletResponse response,
 		AnyUnion_Palpable_Phrasing<?, ?> content,
 		com.semanticcms.file.model.File element
-	) throws ServletException, IOException, SkipPageException {
+	) throws ServletException, IOException {
 		ResourceStore resourceStore;
 		ResourceRef resourceRef;
 		{
