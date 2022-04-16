@@ -20,6 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 package com.semanticcms.file.renderer.html;
 
 import com.aoapps.hodgepodge.util.Tuple2;
