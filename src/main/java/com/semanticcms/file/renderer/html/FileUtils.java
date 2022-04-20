@@ -41,65 +41,69 @@ import javax.servlet.http.HttpServletResponse;
 
 public final class FileUtils {
 
-	/** Make no instances. */
-	private FileUtils() {throw new AssertionError();}
+  /** Make no instances. */
+  private FileUtils() {
+    throw new AssertionError();
+  }
 
-	private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
+  private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
 
-	private static class IsOpenFileAllowedLock {/* Empty lock class to help heap profile */}
-	private static final IsOpenFileAllowedLock isOpenFileAllowedLock = new IsOpenFileAllowedLock();
-	private static boolean openFileNotFound;
+  private static class IsOpenFileAllowedLock {/* Empty lock class to help heap profile */}
+  private static final IsOpenFileAllowedLock isOpenFileAllowedLock = new IsOpenFileAllowedLock();
+  private static boolean openFileNotFound;
 
-	/**
-	 * Determines if local file opening is allowed.
-	 *
-	 * Uses reflection to avoid hard dependency on semanticcms-openfile-servlet.
-	 *
-	 * @see  OpenFile#isAllowed(javax.servlet.ServletContext, javax.servlet.ServletRequest)
-	 */
-	public static boolean isOpenFileAllowed(ServletContext servletContext, ServletRequest request) throws ServletException {
-		synchronized(isOpenFileAllowedLock) {
-			// If failed once, fail quickly the second time
-			if(openFileNotFound) return false;
-			try {
-				Class<?> openFileClass = Class.forName("com.semanticcms.openfile.servlet.OpenFile");
-				Method isAllowedMethod = openFileClass.getMethod("isAllowed", ServletContext.class, ServletRequest.class);
-				return (Boolean)isAllowedMethod.invoke(null, servletContext, request);
-			} catch(ClassNotFoundException e) {
-				logger.warning("Unable to open local files, if desktop integration is desired, add the semanticcms-openfile-servlet package.");
-				openFileNotFound = true;
-				return false;
-			} catch(ReflectiveOperationException e) {
-				throw new ServletException(e);
-			}
-		}
-	}
+  /**
+   * Determines if local file opening is allowed.
+   *
+   * Uses reflection to avoid hard dependency on semanticcms-openfile-servlet.
+   *
+   * @see  OpenFile#isAllowed(javax.servlet.ServletContext, javax.servlet.ServletRequest)
+   */
+  public static boolean isOpenFileAllowed(ServletContext servletContext, ServletRequest request) throws ServletException {
+    synchronized (isOpenFileAllowedLock) {
+      // If failed once, fail quickly the second time
+      if (openFileNotFound) {
+        return false;
+      }
+      try {
+        Class<?> openFileClass = Class.forName("com.semanticcms.openfile.servlet.OpenFile");
+        Method isAllowedMethod = openFileClass.getMethod("isAllowed", ServletContext.class, ServletRequest.class);
+        return (Boolean)isAllowedMethod.invoke(null, servletContext, request);
+      } catch (ClassNotFoundException e) {
+        logger.warning("Unable to open local files, if desktop integration is desired, add the semanticcms-openfile-servlet package.");
+        openFileNotFound = true;
+        return false;
+      } catch (ReflectiveOperationException e) {
+        throw new ServletException(e);
+      }
+    }
+  }
 
-	public static boolean hasFile(
-		ServletContext servletContext,
-		HttpServletRequest request,
-		HttpServletResponse response,
-		Page page,
-		final boolean recursive
-	) throws ServletException, IOException {
-		final SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
-		return CapturePage.traversePagesAnyOrder(
-			servletContext,
-			request,
-			response,
-			page,
-			CaptureLevel.META,
-			p -> {
-				for(Element e : p.getElements()) {
-					if((e instanceof File) && !((File)e).isHidden()) {
-						return true;
-					}
-				}
-				return null;
-			},
-			p -> recursive ? p.getChildRefs() : null,
-			// Child is in accessible book
-			childPage -> semanticCMS.getBook(childPage.getBookRef()).isAccessible()
-		) != null;
-	}
+  public static boolean hasFile(
+    ServletContext servletContext,
+    HttpServletRequest request,
+    HttpServletResponse response,
+    Page page,
+    final boolean recursive
+  ) throws ServletException, IOException {
+    final SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
+    return CapturePage.traversePagesAnyOrder(
+      servletContext,
+      request,
+      response,
+      page,
+      CaptureLevel.META,
+      p -> {
+        for (Element e : p.getElements()) {
+          if ((e instanceof File) && !((File)e).isHidden()) {
+            return true;
+          }
+        }
+        return null;
+      },
+      p -> recursive ? p.getChildRefs() : null,
+      // Child is in accessible book
+      childPage -> semanticCMS.getBook(childPage.getBookRef()).isAccessible()
+    ) != null;
+  }
 }
