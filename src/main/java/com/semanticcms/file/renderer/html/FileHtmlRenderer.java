@@ -70,11 +70,11 @@ public final class FileHtmlRenderer {
    * @param content Optional, when null meta data is verified but no output is generated
    */
   public static void writeFileImpl(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    AnyUnion_Palpable_Phrasing<?, ?> content,
-    com.semanticcms.file.model.File element
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      AnyUnion_Palpable_Phrasing<?, ?> content,
+      com.semanticcms.file.model.File element
   ) throws ServletException, IOException {
     ResourceStore resourceStore;
     ResourceRef resourceRef;
@@ -93,7 +93,8 @@ public final class FileHtmlRenderer {
     ResourceConnection conn = resource == null ? null : resource.open();
     try {
       // Find the local file, if available
-      File resourceFile; {
+      File resourceFile;
+      {
         File resourceFile_;
         if (conn == null || !conn.exists()) {
           resourceFile_ = null;
@@ -118,14 +119,14 @@ public final class FileHtmlRenderer {
         isDirectory = resourceFile.isDirectory();
         // When is a directory, must end in slash
         if (
-          isDirectory
-          && !resourceRef.getPath().toString().endsWith(Path.SEPARATOR_STRING)
+            isDirectory
+                && !resourceRef.getPath().toString().endsWith(Path.SEPARATOR_STRING)
         ) {
           throw new IllegalArgumentException(
-            "References to directories must end in slash ("
-            + Path.SEPARATOR_CHAR
-            + "): "
-            + resourceRef
+              "References to directories must end in slash ("
+                  + Path.SEPARATOR_CHAR
+                  + "): "
+                  + resourceRef
           );
         }
       }
@@ -147,46 +148,46 @@ public final class FileHtmlRenderer {
           a.clazz(HtmlRenderer.getInstance(servletContext).getLinkCssClass(element));
         }
         if (
-          isOpenFileAllowed
-          && resourceFile != null
-          && !isExporting
+            isOpenFileAllowed
+                && resourceFile != null
+                && !isExporting
         ) {
           a.href(response.encodeURL(resourceFile.toURI().toASCIIString()));
         } else {
           final String urlPath;
           long lastModified;
           if (
-            conn != null
-            && !isDirectory
-            // Check for header disabling auto last modified
-            && !"false".equalsIgnoreCase(request.getHeader(LastModifiedServlet.LAST_MODIFIED_HEADER_NAME))
-            && conn.exists()
-            && (lastModified = conn.getLastModified()) != 0
+              conn != null
+                  && !isDirectory
+                  // Check for header disabling auto last modified
+                  && !"false".equalsIgnoreCase(request.getHeader(LastModifiedServlet.LAST_MODIFIED_HEADER_NAME))
+                  && conn.exists()
+                  && (lastModified = conn.getLastModified()) != 0
           ) {
             // Include last modified on file
             urlPath =
-              request.getContextPath()
-              + bookRef.getPrefix()
-              + resourceRef.getPath()
-              + "?" + LastModifiedServlet.LAST_MODIFIED_PARAMETER_NAME
-              + "=" + LastModifiedServlet.encodeLastModified(lastModified)
+                request.getContextPath()
+                    + bookRef.getPrefix()
+                    + resourceRef.getPath()
+                    + "?" + LastModifiedServlet.LAST_MODIFIED_PARAMETER_NAME
+                    + "=" + LastModifiedServlet.encodeLastModified(lastModified)
             ;
           } else {
             urlPath =
-              request.getContextPath()
-              + bookRef.getPrefix()
-              + resourceRef.getPath()
+                request.getContextPath()
+                    + bookRef.getPrefix()
+                    + resourceRef.getPath()
             ;
           }
           a.href(response.encodeURL(URIEncoder.encodeURI(urlPath)));
         }
         if (
-          isOpenFileAllowed
-          && resourceFile != null
-          && !isExporting
+            isOpenFileAllowed
+                && resourceFile != null
+                && !isExporting
         ) {
           a.onclick(onclick -> onclick
-            .append("semanticcms_openfile_servlet.openFile(").text(bookRef.getDomain()).append(", ").text(bookRef.getPath()).append(", ").text(resourceRef.getPath()).append("); return false;")
+                  .append("semanticcms_openfile_servlet.openFile(").text(bookRef.getDomain()).append(", ").text(bookRef.getPath()).append(", ").text(resourceRef.getPath()).append("); return false;")
           );
         }
         a.__(a__ -> {
@@ -218,11 +219,11 @@ public final class FileHtmlRenderer {
         });
         long length;
         if (
-          !hasBody
-          && conn != null
-          && !isDirectory
-          && conn.exists()
-          && (length = conn.getLength()) != -1
+            !hasBody
+                && conn != null
+                && !isDirectory
+                && conn.exists()
+                && (length = conn.getLength()) != -1
         ) {
           content.text(" (").text(Strings.getApproximateSize(length)).text(')');
         }

@@ -48,7 +48,9 @@ public final class FileUtils {
 
   private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
 
-  private static class IsOpenFileAllowedLock {/* Empty lock class to help heap profile */}
+  private static class IsOpenFileAllowedLock {
+    // Empty lock class to help heap profile
+  }
   private static final IsOpenFileAllowedLock isOpenFileAllowedLock = new IsOpenFileAllowedLock();
   private static boolean openFileNotFound;
 
@@ -68,7 +70,7 @@ public final class FileUtils {
       try {
         Class<?> openFileClass = Class.forName("com.semanticcms.openfile.servlet.OpenFile");
         Method isAllowedMethod = openFileClass.getMethod("isAllowed", ServletContext.class, ServletRequest.class);
-        return (Boolean)isAllowedMethod.invoke(null, servletContext, request);
+        return (Boolean) isAllowedMethod.invoke(null, servletContext, request);
       } catch (ClassNotFoundException e) {
         logger.warning("Unable to open local files, if desktop integration is desired, add the semanticcms-openfile-servlet package.");
         openFileNotFound = true;
@@ -80,30 +82,30 @@ public final class FileUtils {
   }
 
   public static boolean hasFile(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    Page page,
-    final boolean recursive
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      Page page,
+      final boolean recursive
   ) throws ServletException, IOException {
     final SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
     return CapturePage.traversePagesAnyOrder(
-      servletContext,
-      request,
-      response,
-      page,
-      CaptureLevel.META,
-      p -> {
-        for (Element e : p.getElements()) {
-          if ((e instanceof File) && !((File)e).isHidden()) {
-            return true;
+        servletContext,
+        request,
+        response,
+        page,
+        CaptureLevel.META,
+        p -> {
+          for (Element e : p.getElements()) {
+            if ((e instanceof File) && !((File) e).isHidden()) {
+              return true;
+            }
           }
-        }
-        return null;
-      },
-      p -> recursive ? p.getChildRefs() : null,
-      // Child is in accessible book
-      childPage -> semanticCMS.getBook(childPage.getBookRef()).isAccessible()
+          return null;
+        },
+        p -> recursive ? p.getChildRefs() : null,
+        // Child is in accessible book
+        childPage -> semanticCMS.getBook(childPage.getBookRef()).isAccessible()
     ) != null;
   }
 }
