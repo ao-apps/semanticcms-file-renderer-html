@@ -49,7 +49,9 @@ public final class FileUtils {
   private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
 
   private static class IsOpenFileAllowedLock {
-    // Empty lock class to help heap profile
+    private IsOpenFileAllowedLock() {
+      // Empty lock class to help heap profile
+    }
   }
   private static final IsOpenFileAllowedLock isOpenFileAllowedLock = new IsOpenFileAllowedLock();
   private static boolean openFileNotFound;
