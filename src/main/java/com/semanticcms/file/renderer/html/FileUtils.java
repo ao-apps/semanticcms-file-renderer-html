@@ -39,6 +39,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Static utilities for working with {@link File}.
+ */
 public final class FileUtils {
 
   /** Make no instances. */
@@ -53,13 +56,15 @@ public final class FileUtils {
       // Empty lock class to help heap profile
     }
   }
+
   private static final IsOpenFileAllowedLock isOpenFileAllowedLock = new IsOpenFileAllowedLock();
   private static boolean openFileNotFound;
 
   /**
    * Determines if local file opening is allowed.
-   *
+   * <p>
    * Uses reflection to avoid hard dependency on semanticcms-openfile-servlet.
+   * </p>
    *
    * @see  OpenFile#isAllowed(javax.servlet.ServletContext, javax.servlet.ServletRequest)
    */
@@ -83,6 +88,9 @@ public final class FileUtils {
     }
   }
 
+  /**
+   * Determines if the given page has any {@link File} that is not {@linkplain File#isHidden() hidden}.
+   */
   public static boolean hasFile(
       ServletContext servletContext,
       HttpServletRequest request,
@@ -90,7 +98,7 @@ public final class FileUtils {
       Page page,
       final boolean recursive
   ) throws ServletException, IOException {
-    final SemanticCMS semanticCMS = SemanticCMS.getInstance(servletContext);
+    final SemanticCMS semanticCms = SemanticCMS.getInstance(servletContext);
     return CapturePage.traversePagesAnyOrder(
         servletContext,
         request,
@@ -107,7 +115,7 @@ public final class FileUtils {
         },
         p -> recursive ? p.getChildRefs() : null,
         // Child is in accessible book
-        childPage -> semanticCMS.getBook(childPage.getBookRef()).isAccessible()
+        childPage -> semanticCms.getBook(childPage.getBookRef()).isAccessible()
     ) != null;
   }
 }

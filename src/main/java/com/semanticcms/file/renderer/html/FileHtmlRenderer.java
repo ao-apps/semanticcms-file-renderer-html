@@ -51,6 +51,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
 
+/**
+ * Writes the file element HTML.
+ */
 public final class FileHtmlRenderer {
 
   /** Make no instances. */
@@ -59,6 +62,8 @@ public final class FileHtmlRenderer {
   }
 
   /**
+   * The body content inside the file element HTML.
+   *
    * @param  <Ex>  An arbitrary exception type that may be thrown
    */
   @FunctionalInterface
@@ -67,6 +72,8 @@ public final class FileHtmlRenderer {
   }
 
   /**
+   * Writes the file element HTML.
+   *
    * @param content Optional, when null meta data is verified but no output is generated
    */
   public static void writeFileImpl(
@@ -78,14 +85,14 @@ public final class FileHtmlRenderer {
   ) throws ServletException, IOException {
     ResourceStore resourceStore;
     ResourceRef resourceRef;
-    {
-      Tuple2<ResourceStore, ResourceRef> resource = element.getResource();
-      if (resource == null) {
-        throw new IllegalArgumentException("Resource not set on file: " + element);
+      {
+        Tuple2<ResourceStore, ResourceRef> resource = element.getResource();
+        if (resource == null) {
+          throw new IllegalArgumentException("Resource not set on file: " + element);
+        }
+        resourceStore = resource.getElement1();
+        resourceRef = resource.getElement2();
       }
-      resourceStore = resource.getElement1();
-      resourceRef = resource.getElement2();
-    }
     BookRef bookRef = resourceRef.getBookRef();
     // Find the resource, if available
     Resource resource = resourceStore == null ? null : resourceStore.getResource(resourceRef.getPath());
@@ -94,21 +101,21 @@ public final class FileHtmlRenderer {
     try {
       // Find the local file, if available
       File resourceFile;
-      {
-        File resourceFile_;
-        if (conn == null || !conn.exists()) {
-          resourceFile_ = null;
-        } else {
-          assert resource != null;
-          try {
-            resourceFile_ = resource.getFile();
-          } catch (FileNotFoundException e) {
-            // Resource removed between exists() and getFile()
-            resourceFile_ = null;
+        {
+          File resourceFileTmp;
+          if (conn == null || !conn.exists()) {
+            resourceFileTmp = null;
+          } else {
+            assert resource != null;
+            try {
+              resourceFileTmp = resource.getFile();
+            } catch (FileNotFoundException e) {
+              // Resource removed between exists() and getFile()
+              resourceFileTmp = null;
+            }
           }
+          resourceFile = resourceFileTmp;
         }
-        resourceFile = resourceFile_;
-      }
       // Check if is directory and filename matches required pattern for directory
       boolean isDirectory;
       if (resourceFile == null) {
@@ -170,14 +177,12 @@ public final class FileHtmlRenderer {
                     + bookRef.getPrefix()
                     + resourceRef.getPath()
                     + "?" + LastModifiedServlet.LAST_MODIFIED_PARAMETER_NAME
-                    + "=" + LastModifiedServlet.encodeLastModified(lastModified)
-            ;
+                    + "=" + LastModifiedServlet.encodeLastModified(lastModified);
           } else {
             urlPath =
                 request.getContextPath()
                     + bookRef.getPrefix()
-                    + resourceRef.getPath()
-            ;
+                    + resourceRef.getPath();
           }
           a.href(response.encodeURL(URIEncoder.encodeURI(urlPath)));
         }
@@ -187,7 +192,7 @@ public final class FileHtmlRenderer {
                 && !isExporting
         ) {
           a.onclick(onclick -> onclick
-                  .append("semanticcms_openfile_servlet.openFile(").text(bookRef.getDomain()).append(", ").text(bookRef.getPath()).append(", ").text(resourceRef.getPath()).append("); return false;")
+              .append("semanticcms_openfile_servlet.openFile(").text(bookRef.getDomain()).append(", ").text(bookRef.getPath()).append(", ").text(resourceRef.getPath()).append("); return false;")
           );
         }
         a.__(a__ -> {
