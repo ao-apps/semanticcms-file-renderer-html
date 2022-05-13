@@ -44,4 +44,4 @@ module com.semanticcms.file.renderer.html {
   requires com.semanticcms.core.renderer; // <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-renderer</artifactId>
   // Java SE
   requires java.logging;
-} // TODO: Avoiding rewrite-maven-plugin-4.22.2 truncation
+}
