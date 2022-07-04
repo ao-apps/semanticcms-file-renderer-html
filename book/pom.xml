@@ -36,15 +36,15 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
     <module.name>com.semanticcms.file.renderer.html.book</module.name>
     <!-- These values are copied from the project being documented -->
     <documented.artifactId>semanticcms-file-renderer-html</documented.artifactId>
-    <documented.name>SemanticCMS File Renderer HTML²</documented.name>
+    <documented.name>SemanticCMS File Renderer HTML</documented.name>
     <documented.description>Files referenced in HTML in a Servlet environment.</documented.description>
 
     <description.html><![CDATA[Documentation for <a target="${javadoc.target}" href="${project.url}">${documented.name}</a> in <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
   </properties>
 
-  <name>SemanticCMS File Renderer HTML² Book</name>
+  <name>SemanticCMS File Renderer HTML Book</name>
   <url>https://semanticcms.com/file/renderer/html/</url>
-  <description>Documentation for SemanticCMS File Renderer HTML² in SemanticCMS format.</description>
+  <description>Documentation for SemanticCMS File Renderer HTML in SemanticCMS format.</description>
   <inceptionYear>2013</inceptionYear>
 
   <licenses>

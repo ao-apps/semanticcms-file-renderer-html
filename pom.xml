@@ -45,7 +45,7 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
     <sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>
   </properties>
 
-  <name>SemanticCMS File Renderer HTML²</name>
+  <name>SemanticCMS File Renderer HTML</name>
   <url>https://semanticcms.com/file/renderer/html/</url>
   <description>Files referenced in HTML in a Servlet environment.</description>
   <inceptionYear>2013</inceptionYear>
