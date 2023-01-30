@@ -114,6 +114,15 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <usedDependencies>
+            <!-- Used through reflection only -->
+            <dependency>com.semanticcms:semanticcms-openfile-servlet</dependency>
+          </usedDependencies>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>com.github.spotbugs</groupId><artifactId>spotbugs-maven-plugin</artifactId>
         <configuration>
           <!-- TODO: Clean-up SpotBugs -->
@@ -506,7 +515,6 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
       <groupId>com.semanticcms</groupId><artifactId>semanticcms-file-model</artifactId>
     </dependency>
     <dependency>
-      <!-- mvn dependency:analyze will report this as unused, it is actually used through reflection -->
       <groupId>com.semanticcms</groupId><artifactId>semanticcms-openfile-servlet</artifactId>
       <optional>true</optional>
     </dependency>
