@@ -38,10 +38,6 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
     <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a>
 / <a target="${javadoc.target}" href="https://semanticcms.com/file/">File</a>
 / <a target="${javadoc.target}" href="${project.url}">Renderer HTML</a>]]></javadoc.breadcrumbs>
-    <!-- SonarQube -->
-    <sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
-    <sonar.organization>ao-apps</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <!-- TODO: Implement tests -->
     <sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>
   </properties>
