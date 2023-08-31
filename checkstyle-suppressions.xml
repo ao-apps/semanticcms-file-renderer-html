@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 semanticcms-file-renderer-html - Files referenced in HTML in a Servlet environment.
-Copyright (C) 2022  AO Industries, Inc.
+Copyright (C) 2022, 2023  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -27,7 +27,7 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
 
 <suppressions>
 
-  <!-- Using "Ex" for generic exceptions, since "E" if often "Element" -->
+  <!-- Using "Ex" for generic exceptions, since "E" is often "Element" -->
   <suppress
     checks="InterfaceTypeParameterName"
     message="'Ex'"
