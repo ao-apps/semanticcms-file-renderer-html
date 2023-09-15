@@ -478,9 +478,9 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
         <groupId>org.webjars.npm</groupId><artifactId>jquery</artifactId><version>3.7.1</version>
       </dependency>
       <!-- javaee-web-api-bom: <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-impl</artifactId> -->
-      <!-- BOM -->
+      <!-- Imports -->
       <dependency>
-        <groupId>com.aoapps</groupId><artifactId>javaee-web-api-bom</artifactId><version>7.0.1${POST-SNAPSHOT}</version>
+        <groupId>com.aoapps</groupId><artifactId>javaee-web-api-bom</artifactId><version>7.0.1-POST-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -540,6 +540,12 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
     <dependency>
       <groupId>com.semanticcms</groupId><artifactId>semanticcms-openfile-servlet</artifactId>
       <optional>true</optional>
+    </dependency>
+    <!-- Imports (Reactor build order only) -->
+    <dependency>
+      <groupId>com.aoapps</groupId><artifactId>javaee-web-api-bom</artifactId><version>7.0.1-POST-SNAPSHOT</version>
+      <type>pom</type>
+      <exclusions><exclusion><artifactId>*</artifactId><groupId>*</groupId></exclusion></exclusions>
     </dependency>
   </dependencies>
 </project>
