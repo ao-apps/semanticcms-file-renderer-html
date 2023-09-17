@@ -33,6 +33,8 @@ along with semanticcms-file-renderer-html.  If not, see <https://www.gnu.org/lic
   <packaging>jar</packaging>
 
   <properties>
+    <!-- Must be set to ${git.commit.time} for snapshots or ISO 8601 timestamp for releases. -->
+    <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
     <module.name>com.semanticcms.file.renderer.html</module.name>
     <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a>
 / <a target="${javadoc.target}" href="https://semanticcms.com/file/">File</a>
