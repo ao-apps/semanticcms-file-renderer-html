@@ -1,6 +1,6 @@
 /*
  * semanticcms-file-renderer-html - Files referenced in HTML in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -88,14 +88,14 @@ public final class FileHtmlRenderer {
   ) throws ServletException, IOException {
     ResourceStore resourceStore;
     ResourceRef resourceRef;
-      {
-        Tuple2<ResourceStore, ResourceRef> resource = element.getResource();
-        if (resource == null) {
-          throw new IllegalArgumentException("Resource not set on file: " + element);
-        }
-        resourceStore = resource.getElement1();
-        resourceRef = resource.getElement2();
+    {
+      Tuple2<ResourceStore, ResourceRef> resource = element.getResource();
+      if (resource == null) {
+        throw new IllegalArgumentException("Resource not set on file: " + element);
       }
+      resourceStore = resource.getElement1();
+      resourceRef = resource.getElement2();
+    }
     BookRef bookRef = resourceRef.getBookRef();
     // Find the resource, if available
     Resource resource = resourceStore == null ? null : resourceStore.getResource(resourceRef.getPath());
@@ -104,21 +104,21 @@ public final class FileHtmlRenderer {
     try {
       // Find the local file, if available
       File resourceFile;
-        {
-          File resourceFileTmp;
-          if (conn == null || !conn.exists()) {
+      {
+        File resourceFileTmp;
+        if (conn == null || !conn.exists()) {
+          resourceFileTmp = null;
+        } else {
+          assert resource != null;
+          try {
+            resourceFileTmp = resource.getFile();
+          } catch (FileNotFoundException e) {
+            // Resource removed between exists() and getFile()
             resourceFileTmp = null;
-          } else {
-            assert resource != null;
-            try {
-              resourceFileTmp = resource.getFile();
-            } catch (FileNotFoundException e) {
-              // Resource removed between exists() and getFile()
-              resourceFileTmp = null;
-            }
           }
-          resourceFile = resourceFileTmp;
         }
+        resourceFile = resourceFileTmp;
+      }
       // Check if is directory and filename matches required pattern for directory
       boolean isDirectory;
       if (resourceFile == null) {
