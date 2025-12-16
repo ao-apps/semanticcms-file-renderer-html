@@ -34,7 +34,7 @@ def upstreamProjects = [
   '../../oss/io-buffer', // <groupId>com.aoapps</groupId><artifactId>ao-io-buffer</artifactId>
   '../../oss/lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   '../../oss/net-types', // <groupId>com.aoapps</groupId><artifactId>ao-net-types</artifactId>
-  '../../oss/servlet-last-modified', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-last-modified</artifactId>
+  '../../oss/servlet-last-modified-javaee', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-last-modified</artifactId>
   // No Jenkins: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
   // No Jenkins: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId>
   '../core/controller', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId>
