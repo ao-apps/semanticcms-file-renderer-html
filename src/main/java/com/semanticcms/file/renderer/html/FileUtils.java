@@ -1,6 +1,6 @@
 /*
  * semanticcms-file-renderer-html - Files referenced in HTML in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,14 +30,14 @@ import com.semanticcms.core.model.Page;
 import com.semanticcms.core.pages.CaptureLevel;
 import com.semanticcms.file.model.File;
 import com.semanticcms.openfile.servlet.OpenFile;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Static utilities for working with {@link File}.
@@ -65,7 +65,7 @@ public final class FileUtils {
    *
    * <p>Uses reflection to avoid hard dependency on semanticcms-openfile-servlet.</p>
    *
-   * @see  OpenFile#isAllowed(javax.servlet.ServletContext, javax.servlet.ServletRequest)
+   * @see  OpenFile#isAllowed(jakarta.servlet.ServletContext, jakarta.servlet.ServletRequest)
    */
   public static boolean isOpenFileAllowed(ServletContext servletContext, ServletRequest request) throws ServletException {
     synchronized (isOpenFileAllowedLock) {
